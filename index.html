@@ -21,7 +21,7 @@
         <div class = 'criar-quizz'>
             <span>Você não criou nenhum</span>
             <span>quizz ainda :(</span>
-            <button>Criar quizz</button>
+            <button onclick="criaQuizz()">Criar quizz</button>
         </div>
 
         <div class = 'container'>
@@ -41,6 +41,21 @@
         </div>
                 
     </div>
+
+    <!-- TELA 3: CRIAÇÃO DE QUIZ-->
+    <div class="criando-quizz none">
+        <div class="caracteristicas-gerais-quizz"> 
+            <div class="titulo-comeco"><b>Comece pelo começo</b></div>
+            <div class="inputs-das-caracteristicas">
+                <input type="text" placeholder="Título do seu quizz">
+                <input type="text" placeholder="URL da imagem do seu quizz">
+                <input type="text" placeholder="Quantidade de perguntas do quizz">
+                <input type="text" placeholder="Quantidade de níveis do quizz">
+            </div> 
+        </div>
+        <button class="prosseguir">Prosseguir para criar perguntas</button>
+    </div>
+
     
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

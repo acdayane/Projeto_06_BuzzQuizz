@@ -1,4 +1,5 @@
 
+
 // Obter quizzes que não são do usuário para tela 1
 obterQuizzes();
 
@@ -27,5 +28,10 @@ function renderizarQuizzes (res) {
 
 function deuErro(err) {
     console.log('Deu erro no recebimento dos quizzes', err);
-    alert("Algo deu errado. Por favor, recarregue a página.");   
+    alert("Algo deu errado. Por favor, recarregue a página.");  
+} 
+
+function criaQuizz(){
+    let criandoQuizz= document.querySelector(".criando-quizz");
+    criandoQuizz.classList.remove("none");
 }
