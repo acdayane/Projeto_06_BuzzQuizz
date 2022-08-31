@@ -31,7 +31,7 @@ function deuErro(err) {
     alert("Algo deu errado. Por favor, recarregue a página.");  
 } 
 
-function criaQuizz(){
+function criarQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
     criandoQuizz.classList.remove("none");
 }

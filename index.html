@@ -21,7 +21,7 @@
         <div class = 'criar-quizz'>
             <span>Você não criou nenhum</span>
             <span>quizz ainda :(</span>
-            <button onclick="criaQuizz()">Criar quizz</button>
+            <button onclick="criarQuizz()">Criar quizz</button>
         </div>
 
         <div class = 'container'>
@@ -39,10 +39,9 @@
                 </ul>
             </div>
         </div>
-                
     </div>
 
-    <!-- TELA 3: CRIAÇÃO DE QUIZ-->
+    <!-- TELA 3.1: CRIAÇÃO DE QUIZ-->
     <div class="criando-quizz none">
         <div class="caracteristicas-gerais-quizz"> 
             <div class="titulo-comeco"><b>Comece pelo começo</b></div>
@@ -54,6 +53,35 @@
             </div> 
         </div>
         <button class="prosseguir">Prosseguir para criar perguntas</button>
+    </div>
+
+    <!-- TELA 3.2: PERGUNTAS DO QUIZZ-->
+
+    <div class="tela-criando-perguntas-quizz">
+        <div class="criando-perguntas">
+            <div class="titulo-comeco">Crie suas perguntas</div>
+            <ul class="container-perguntas">
+                <li>
+                    <div class="perguntaX">
+                        <div class="numero-da-pergunta text"></div>
+                        <input type="text" placeholder="texto da pergunta">
+                        <input type="text" placeholder="cor de fundo da pergunta"> 
+                        <div class="resposta-correta text"></div>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                        <div class="respostas-incorretas text"></div>
+                        <input type="text" placeholder="Resposta incorreta 1">
+                        <input type="text" placeholder="URL da imagem 1">
+
+                        <input type="text" placeholder="Resposta incorreta 2">
+                        <input type="text" placeholder="URL da i8magem 2">
+
+                        <input type="text" placeholder="Resposta incorreta 3">
+                        <input type="text" placeholder="URL da i8magem 3">
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     
