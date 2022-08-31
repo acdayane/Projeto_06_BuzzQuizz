@@ -82,11 +82,14 @@ header h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 30px ;
+    padding-bottom: 100px;
+    position: fixed;
+    top:69px;
 }
 
 .caracteristicas-gerais-quizz{
     width: 600px;
-    height: 460px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -127,6 +130,7 @@ header h1 {
     line-height: 19px;
     color:  #BABABA;
     margin-bottom: 9px;
+    outline: none;
 }
 
 input::placeholder{
@@ -138,7 +142,7 @@ input::placeholder{
 }
 
 .prosseguir{
-    min-width: 368px;
+    width: 368px;
     height: 54px;
     background-color: #EC362D;
     border-radius: 15px;
@@ -150,6 +154,11 @@ input::placeholder{
     color: rgba(255, 245, 244, 1);
 }
 
+/* CLASSE PARA FAZER AS TELAS SUMIREM E, AO RETIRARÁ-LA, A TELA APARECE */
+.none{
+    display: none;
+}
+
 @media (max-width: 1100px) {
 
 .criar-quizz {
@@ -158,6 +167,10 @@ input::placeholder{
 
 .caracteristicas-gerais-quizz{
     width: 100vw;
+}
+
+.prosseguir{
+    width: 85%;
 }
 
 }
