@@ -138,9 +138,7 @@ header h1 {
 .quizz span {
     position: absolute;
     left: 15px;
-    bottom: 20px; 
-    z-index: 1;
-    
+    bottom: 20px;        
 }
 
 .um-quizz .quizz img {
