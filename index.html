@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <!-- TELA 3.3: NÍVEIS DO QUIZZ]-->
+    <!-- TELA 3.3: NÍVEIS DO QUIZZ-->
 
     <div class="niveis-do-quizz none">
         <div class="criando-níveis">
@@ -136,10 +136,22 @@
                 </li>
             </ul>
 
-            <button class="prosseguir">Finalizar Quizz</button>
+            <button class="prosseguir" onclick="sucessoQuizz()">Finalizar Quizz</button>
         </div>
     </div>
 
+    <!-- TELA 3.4: SUCESSO DO QUIZZ-->
+    <div class="sucesso-quizz none">
+        <div class="container-sucesso-quizz"> 
+            <div class="titulo-comeco"><b>Seu quizz está pronto!</b></div>
+            <div class = 'quizz' onclick = 'buscarQuizz(${quizzes[i].id})'>
+                    <span>Texto do seu quizz aqui</span>
+                    <img src ='https://s.aficionados.com.br/imagens/gnomo.jpg'/>
+            </div> 
+        </div>
+        <button class="acessar-quizz">Acessar Quizz</button>
+        <button class="back-home" onclick="backHome()">Voltar pra home</button>
+    </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

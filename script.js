@@ -34,13 +34,14 @@ function deuErro(err) {
 } 
 
 //VARIÁVEIS USADAS MAIS DE UMA VEZ:
-let noneTela1= document.querySelector(".conteudo-principal");
+let homePage= document.querySelector(".conteudo-principal");
 let criandoQuizz= document.querySelector(".criando-quizz");
 let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
 let niveisQuizz= document.querySelector(".niveis-do-quizz");
+let sucessoDoQuizz= document.querySelector(".sucesso-quizz");
 
 function criarQuizz(){
-    noneTela1.classList.add("none")
+    homePage.classList.add("none")
     criandoQuizz.classList.remove("none");
 }
 
@@ -52,6 +53,16 @@ function criePerguntas(){
 function niveisDoQuizz(){
     niveisQuizz.classList.remove("none");
     perguntasCriadas.classList.add("none");
+}
+
+function sucessoQuizz(){
+    niveisQuizz.classList.add("none");
+    sucessoDoQuizz.classList.remove("none");
+}
+
+function backHome(){
+    homePage.classList.remove("none");
+    sucessoDoQuizz.classList.add("none");
 }
 
 // Abrir quizz selecionado na tela 2

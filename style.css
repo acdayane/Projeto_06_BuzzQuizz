@@ -147,7 +147,7 @@ header h1 {
 }
 
 /* TELA 3.1: CRIAÇÃO DE QUIZ */
-.criando-quizz{
+.criando-quizz, .sucesso-quizz{
     background-color: #E5E5E5;
     width: 100vw;
     height: 100vh;
@@ -240,7 +240,7 @@ input::placeholder{
     margin-top:69px;
 }
 
-.criando-perguntas, .criando-níveis{
+.criando-perguntas, .criando-níveis, .container-sucesso-quizz{
     width: 601px;
     display: flex;
     flex-direction: column;
@@ -317,6 +317,34 @@ input::placeholder{
 
 .perguntaX input.descricao-nivel{
     height: 177px;
+}
+
+/* TELA 3.4: SUCESSO DO QUIZZ */
+
+.acessar-quizz{
+    width: 220px;
+    height: 54px;
+    margin-top: 45px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    border: none;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: rgba(255, 245, 244, 1);
+}
+
+.back-home{
+    width: 368px;
+    height: 54px;
+    background: none;
+    border: none;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: rgba(129, 129, 129, 1);
 }
 
 /* CLASSE PARA FAZER AS TELAS SUMIREM E, AO RETIRARÁ-LA, A TELA APARECE */
