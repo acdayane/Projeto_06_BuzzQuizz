@@ -40,14 +40,38 @@ let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
 let niveisQuizz= document.querySelector(".niveis-do-quizz");
 let sucessoDoQuizz= document.querySelector(".sucesso-quizz");
 
+//VALORES DOS INPUTS:
+let tituloQuizz= document.querySelector(".Título-Quizz");
+let URLQuizz= document.querySelector(".URL-Quizz");
+let quantidadePerguntas= document.querySelector(".quantidade-perguntas");
+let nivelQuizz= document.querySelector(".niveis-Quizz");
+
 function criarQuizz(){
     homePage.classList.add("none")
     criandoQuizz.classList.remove("none");
 }
 
 function criePerguntas(){
-    criandoQuizz.classList.add("none");
-    perguntasCriadas.classList.remove("none");
+    if(tituloQuizz.value.length>=20 && tituloQuizz.value.length<=65){
+        if(URLQuizz.value.includes('https')== true|| URLQuizz.value.includes('http')==true) {
+            if(quantidadePerguntas.value>=3 && quantidadePerguntas.value<=5 && nivelQuizz.value>=2 && nivelQuizz.value<=5){
+                criandoQuizz.classList.add("none");
+                perguntasCriadas.classList.remove("none");
+            }
+            else{
+                alert("Atenção: a quantidade de perguntas é no máximo 5 e no mínimo 3. A quantidade de níveis é no máximo 5 e no mínimo 2")
+            }
+        }else {
+            alert("Atenção: sua imagem precisa ser uma URL")
+        } 
+    }
+    else {
+        alert("Atenção: o título precisa conter no mínimo 20 caracteres e no máximo 65")
+    }
+   console.log(tituloQuizz.value) ;
+   console.log(URLQuizz.value) ;
+   console.log(quantidadePerguntas.value);
+   console.log(nivelQuizz.value);
 }
 
 function niveisDoQuizz(){
