@@ -33,11 +33,11 @@ function deuErro(err) {
     alert("Algo deu errado. Por favor, recarregue a página.");  
 } 
 
-<<<<<<< HEAD
 //VARIÁVEIS USADAS MAIS DE UMA VEZ:
 let noneTela1= document.querySelector(".conteudo-principal");
 let criandoQuizz= document.querySelector(".criando-quizz");
 let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
+let niveisQuizz= document.querySelector(".niveis-do-quizz");
 
 function criarQuizz(){
     noneTela1.classList.add("none")
@@ -48,7 +48,11 @@ function criePerguntas(){
     criandoQuizz.classList.add("none");
     perguntasCriadas.classList.remove("none");
 }
-=======
+
+function niveisDoQuizz(){
+    niveisQuizz.classList.remove("none");
+    perguntasCriadas.classList.add("none");
+}
 
 // Abrir quizz selecionado na tela 2
 function buscarQuizz(idQuizz) {
@@ -91,6 +95,3 @@ function criaQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
     criandoQuizz.classList.remove("none");
 }
-
-
->>>>>>> b29e637bd1c784f3ecff49ddc4f3703bd02a5b6a

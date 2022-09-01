@@ -80,10 +80,10 @@
                         <input type="text" placeholder="URL da imagem">
                         <div class="respostas-incorretas text">Respostas incorretas</div>
                         <input type="text" placeholder="Resposta incorreta 1">
-                        <input type="text" placeholder="URL da imagem 1">
+                        <input type="text" class="margin-bottom" placeholder="URL da imagem 1">
 
                         <input type="text" placeholder="Resposta incorreta 2">
-                        <input type="text" placeholder="URL da imagem 2">
+                        <input type="text" class="margin-bottom" placeholder="URL da imagem 2">
 
                         <input type="text" placeholder="Resposta incorreta 3">
                         <input type="text" placeholder="URL da imagem 3">
@@ -103,9 +103,43 @@
                 </li>
             </ul>
 
-            <button class="prosseguir">Prosseguir para criar níveis</button>
+            <button class="prosseguir" onclick="niveisDoQuizz()">Prosseguir para criar níveis</button>
         </div>
     </div>
+
+    <!-- TELA 3.3: NÍVEIS DO QUIZZ]-->
+
+    <div class="niveis-do-quizz none">
+        <div class="criando-níveis">
+            <div class="titulo-comeco">Agora, decida os níveis!</div>
+            <ul class="container-perguntas">
+                <li>
+                    <div class="perguntaX">
+                        <div class="numero-da-pergunta text">Nivel 1</div>
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima"> 
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" class="descricao-nivel" placeholder="Descrição do nível">
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Nível 2 <ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Nível 3 <ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+            </ul>
+
+            <button class="prosseguir">Finalizar Quizz</button>
+        </div>
+    </div>
+
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

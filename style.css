@@ -203,6 +203,7 @@ header h1 {
     line-height: 19px;
     color:  #BABABA;
     margin-bottom: 9px;
+    padding: 15px 15px;
     outline: none;
 }
 
@@ -228,7 +229,7 @@ input::placeholder{
 }
 
 /* TELA 3.2:  PERGUNATS DO QUIZZ*/
-.tela-criando-perguntas-quizz{
+.tela-criando-perguntas-quizz, .niveis-do-quizz{
     background-color:  #E5E5E5;
     width: 100vw;
     display: flex;
@@ -239,7 +240,7 @@ input::placeholder{
     margin-top:69px;
 }
 
-.criando-perguntas{
+.criando-perguntas, .criando-níveis{
     width: 601px;
     display: flex;
     flex-direction: column;
@@ -253,7 +254,7 @@ input::placeholder{
 
 .perguntaX{
     width: 601px;
-    height: 825px;
+    /*height: 825px;*/
     padding: 27px 18px;
     margin-bottom: 24px;
     background-color: rgba(255, 255, 255, 1);
@@ -271,7 +272,12 @@ input::placeholder{
     line-height: 19px;
     color:  #BABABA;
     margin-bottom: 9px;
+    padding: 15px 15px;
     outline: none;
+}
+
+.perguntaX input.margin-bottom{
+    margin-bottom: 34px;
 }
 
 .text{
@@ -305,6 +311,12 @@ input::placeholder{
     font-size: 20px;
     line-height: 24px;
     color: rgba(0, 0, 0, 1);
+}
+
+/* TELA 3.3: NÍVEIS DO QUIZZ */
+
+.perguntaX input.descricao-nivel{
+    height: 177px;
 }
 
 /* CLASSE PARA FAZER AS TELAS SUMIREM E, AO RETIRARÁ-LA, A TELA APARECE */
