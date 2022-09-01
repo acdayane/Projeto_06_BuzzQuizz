@@ -31,7 +31,17 @@ function deuErro(err) {
     alert("Algo deu errado. Por favor, recarregue a página.");  
 } 
 
+//VARIÁVEIS USADAS MAIS DE UMA VEZ:
+let noneTela1= document.querySelector(".conteudo-principal");
+let criandoQuizz= document.querySelector(".criando-quizz");
+let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
+
 function criarQuizz(){
-    let criandoQuizz= document.querySelector(".criando-quizz");
+    noneTela1.classList.add("none")
     criandoQuizz.classList.remove("none");
+}
+
+function criePerguntas(){
+    criandoQuizz.classList.add("none");
+    perguntasCriadas.classList.remove("none");
 }

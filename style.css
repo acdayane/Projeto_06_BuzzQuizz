@@ -197,16 +197,22 @@ input::placeholder{
 
 /* TELA 3.2:  PERGUNATS DO QUIZZ*/
 .tela-criando-perguntas-quizz{
-    background-color: pink;
+    background-color:  #E5E5E5;
     width: 100vw;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 30px ;
     padding-bottom: 100px;
-    position: fixed;
-    top:69px;
+    margin-top:69px;
+}
+
+.criando-perguntas{
+    width: 601px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container-perguntas{
@@ -216,10 +222,10 @@ input::placeholder{
 .perguntaX{
     width: 601px;
     height: 825px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 27px 18px;
+    margin-bottom: 24px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px -1px rgba(134, 133, 133, 0.5);
 }
 
 .perguntaX input{
@@ -237,10 +243,32 @@ input::placeholder{
 }
 
 .text{
-    z-index: 2;
-    width: 99px;
     height: 27px;
+    margin-top: 28px;
     margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.pergunta-fechada{
+    width: 601px;
+    height: 74px;
+    margin-bottom: 24px;
+    padding: 20px 18px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px -1px rgba(134, 133, 133, 0.5);
+}
+
+.text-closed ion-icon{
+    font-size: 26px;
+    color: rgba(0, 0, 0, 1);
+    margin-left: 75%;
+}
+
+.text-closed{
+    height: 27px;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;

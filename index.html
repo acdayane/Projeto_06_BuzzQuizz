@@ -52,39 +52,51 @@
                 <input type="text" placeholder="Quantidade de níveis do quizz">
             </div> 
         </div>
-        <button class="prosseguir">Prosseguir para criar perguntas</button>
+        <button class="prosseguir" onclick="criePerguntas()">Prosseguir para criar perguntas</button>
     </div>
 
     <!-- TELA 3.2: PERGUNTAS DO QUIZZ-->
 
-    <div class="tela-criando-perguntas-quizz">
+    <div class="tela-criando-perguntas-quizz none">
         <div class="criando-perguntas">
             <div class="titulo-comeco">Crie suas perguntas</div>
             <ul class="container-perguntas">
                 <li>
                     <div class="perguntaX">
-                        <div class="numero-da-pergunta text"></div>
+                        <div class="numero-da-pergunta text">Pergunta 1</div>
                         <input type="text" placeholder="texto da pergunta">
                         <input type="text" placeholder="cor de fundo da pergunta"> 
-                        <div class="resposta-correta text"></div>
+                        <div class="resposta-correta text">Resposta correta</div>
                         <input type="text" placeholder="Resposta correta">
                         <input type="text" placeholder="URL da imagem">
-                        <div class="respostas-incorretas text"></div>
+                        <div class="respostas-incorretas text">Respostas incorretas</div>
                         <input type="text" placeholder="Resposta incorreta 1">
                         <input type="text" placeholder="URL da imagem 1">
 
                         <input type="text" placeholder="Resposta incorreta 2">
-                        <input type="text" placeholder="URL da i8magem 2">
+                        <input type="text" placeholder="URL da imagem 2">
 
                         <input type="text" placeholder="Resposta incorreta 3">
-                        <input type="text" placeholder="URL da i8magem 3">
+                        <input type="text" placeholder="URL da imagem 3">
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Pergunta 2 <ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Pergunta 3 <ion-icon name="create-outline"></ion-icon></div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 
-    
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
