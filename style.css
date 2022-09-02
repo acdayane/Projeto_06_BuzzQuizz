@@ -201,8 +201,8 @@ header h1 {
     width: 688px;
 }
 
-/* TELA 3: CRIAÇÃO DE QUIZ */
-.criando-quizz{
+/* TELA 3.1: CRIAÇÃO DE QUIZ */
+.criando-quizz, .sucesso-quizz{
     background-color: #E5E5E5;
     width: 100vw;
     height: 100vh;
@@ -258,6 +258,7 @@ header h1 {
     line-height: 19px;
     color:  #BABABA;
     margin-bottom: 9px;
+    padding: 15px 15px;
     outline: none;
 }
 
@@ -280,6 +281,126 @@ input::placeholder{
     line-height: 25px;
     text-align: center;
     color: rgba(255, 245, 244, 1);
+}
+
+/* TELA 3.2:  PERGUNATS DO QUIZZ*/
+.tela-criando-perguntas-quizz, .niveis-do-quizz{
+    background-color:  #E5E5E5;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px ;
+    padding-bottom: 100px;
+    margin-top:69px;
+}
+
+.criando-perguntas, .criando-níveis, .container-sucesso-quizz{
+    width: 601px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-perguntas{
+    width: 100%;
+}
+
+.perguntaX{
+    width: 100%;
+    /*height: 825px;*/
+    padding: 5px 18px;
+    margin-bottom: 24px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px -1px rgba(134, 133, 133, 0.5);
+}
+
+.perguntaX input{
+    width: 97%;
+    height: 46px;
+    border: 1px solid rgba(209, 209, 209, 1);
+    border-radius: 5px;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 19px;
+    color:  #BABABA;
+    margin-bottom: 9px;
+    padding: 15px 15px;
+    outline: none;
+}
+
+.perguntaX input.margin-bottom{
+    margin-bottom: 34px;
+}
+
+.text{
+    height: 27px;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.pergunta-fechada{
+    width: 100%;
+    height: 74px;
+    margin-bottom: 24px;
+    padding: 20px 18px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px -1px rgba(134, 133, 133, 0.5);
+}
+
+.text-closed ion-icon{
+    font-size: 26px;
+    color: rgba(0, 0, 0, 1);
+    margin-left: 75%;
+}
+
+.text-closed{
+    height: 27px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 1);
+}
+
+/* TELA 3.3: NÍVEIS DO QUIZZ */
+
+.perguntaX input.descricao-nivel{
+    height: 177px;
+}
+
+/* TELA 3.4: SUCESSO DO QUIZZ */
+
+.acessar-quizz{
+    width: 220px;
+    height: 64px;
+    margin-top: 45px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    border: none;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: rgba(255, 245, 244, 1);
+}
+
+.back-home{
+    width: 368px;
+    height: 54px;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: rgba(129, 129, 129, 1);
 }
 
 /* CLASSE PARA FAZER AS TELAS SUMIREM E, AO RETIRARÁ-LA, A TELA APARECE */
@@ -310,6 +431,14 @@ input::placeholder{
 
 .prosseguir{
     width: 85%;
+}
+
+.criando-perguntas, .criando-níveis, .container-sucesso-quizz{
+    width: 100vw;
+}
+
+.text-closed ion-icon{
+    margin-left: 65%;
 }
 
 .container img {

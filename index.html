@@ -22,7 +22,7 @@
         <div class = 'criar-quizz'>
             <span>Você não criou nenhum</span>
             <span>quizz ainda :(</span>
-            <button onclick="criaQuizz()">Criar quizz</button>
+            <button onclick="criarQuizz()">Criar quizz</button>
         </div>
 
         <div class = 'container'>
@@ -43,6 +43,7 @@
             </div>
 
         </div>
+
 
     </div>
 
@@ -67,20 +68,118 @@
     
 
     <!-- TELA 3: CRIAÇÃO DE QUIZ-->
+
+        <!-- TELA 2: UM QUIZZ-->
+        <div class = 'um-quizz none'>
+            
+        </div>
+    </div>
+
+    <!-- TELA 3.1: CRIAÇÃO DE QUIZ-->
+
     <div class="criando-quizz none">
         <div class="caracteristicas-gerais-quizz"> 
             <div class="titulo-comeco"><b>Comece pelo começo</b></div>
             <div class="inputs-das-caracteristicas">
-                <input type="text" placeholder="Título do seu quizz">
-                <input type="text" placeholder="URL da imagem do seu quizz">
-                <input type="text" placeholder="Quantidade de perguntas do quizz">
-                <input type="text" placeholder="Quantidade de níveis do quizz">
+                <input type="text" class="Título-Quizz" placeholder="Título do seu quizz">
+                <input type="text" class="URL-Quizz" placeholder="URL da imagem do seu quizz">
+                <input type="text" class="quantidade-perguntas" placeholder="Quantidade de perguntas do quizz">
+                <input type="text" class="niveis-Quizz" placeholder="Quantidade de níveis do quizz">
             </div> 
         </div>
-        <button class="prosseguir">Prosseguir para criar perguntas</button>
+        <button class="prosseguir" onclick="criePerguntas()">Prosseguir para criar perguntas</button>
     </div>
 
-    
+    <!-- TELA 3.2: PERGUNTAS DO QUIZZ-->
+
+    <div class="tela-criando-perguntas-quizz none">
+        <div class="criando-perguntas">
+            <div class="titulo-comeco">Crie suas perguntas</div>
+            <ul class="container-perguntas">
+                <li>
+                    <div class="perguntaX">
+                        <div class="numero-da-pergunta text">Pergunta 1</div>
+                        <input type="text" placeholder="texto da pergunta">
+                        <input type="text" placeholder="cor de fundo da pergunta"> 
+                        <div class="resposta-correta text">Resposta correta</div>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                        <div class="respostas-incorretas text">Respostas incorretas</div>
+                        <input type="text" placeholder="Resposta incorreta 1">
+                        <input type="text" class="margin-bottom" placeholder="URL da imagem 1">
+
+                        <input type="text" placeholder="Resposta incorreta 2">
+                        <input type="text" class="margin-bottom" placeholder="URL da imagem 2">
+
+                        <input type="text" placeholder="Resposta incorreta 3">
+                        <input type="text" placeholder="URL da imagem 3">
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Pergunta 2<ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Pergunta 3<ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+            </ul>
+
+            <button class="prosseguir" onclick="niveisDoQuizz()">Prosseguir para criar níveis</button>
+        </div>
+    </div>
+
+    <!-- TELA 3.3: NÍVEIS DO QUIZZ-->
+
+    <div class="niveis-do-quizz none">
+        <div class="criando-níveis">
+            <div class="titulo-comeco">Agora, decida os níveis!</div>
+            <ul class="container-perguntas">
+                <li>
+                    <div class="perguntaX">
+                        <div class="numero-da-pergunta text">Nivel 1</div>
+                        <input type="text" placeholder="Título do nível">
+                        <input type="text" placeholder="% de acerto mínima"> 
+                        <input type="text" placeholder="URL da imagem do nível">
+                        <input type="text" class="descricao-nivel" placeholder="Descrição do nível">
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Nível 2 <ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pergunta-fechada">
+                        <div class="numero-da-pergunta text-closed">Nível 3 <ion-icon name="create-outline"></ion-icon></div>
+                    </div>
+                </li>
+            </ul>
+
+            <button class="prosseguir" onclick="sucessoQuizz()">Finalizar Quizz</button>
+        </div>
+    </div>
+
+    <!-- TELA 3.4: SUCESSO DO QUIZZ-->
+    <div class="sucesso-quizz none">
+        <div class="container-sucesso-quizz"> 
+            <div class="titulo-comeco"><b>Seu quizz está pronto!</b></div>
+            <div class = 'quizz' onclick = 'buscarQuizz(${quizzes[i].id})'>
+                    <span>Texto do seu quizz aqui</span>
+                    <img src ='https://s.aficionados.com.br/imagens/gnomo.jpg'/>
+            </div> 
+        </div>
+        <button class="acessar-quizz">Acessar Quizz</button>
+        <button class="back-home" onclick="backHome()">Voltar pra home</button>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
