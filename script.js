@@ -40,6 +40,7 @@ let criandoQuizz= document.querySelector(".criando-quizz");
 let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
 let niveisQuizz= document.querySelector(".niveis-do-quizz");
 let sucessoDoQuizz= document.querySelector(".sucesso-quizz");
+let containerPerguntas= document.querySelector(".container-perguntas");
 
 //VALORES DOS INPUTS:
 let tituloQuizz= document.querySelector(".Título-Quizz");
@@ -69,10 +70,47 @@ function criePerguntas(){
     else {
         alert("Atenção: o título precisa conter no mínimo 20 caracteres e no máximo 65")
     }
+
+    for(let i=0; i<quantidadePerguntas.value; i++){
+        containerPerguntas.innerHTML+= `
+
+    <li onclick="editarQuestaox(this)">
+        <div class="pergunta-fechada">
+            <div class="numero-da-pergunta text-closed">Pergunta ${i+1}<ion-icon name="create-outline"></ion-icon></div>
+        </div>
+        
+        <div class="perguntaX pergunta${i+1} none">
+            <div class="numero-da-pergunta text">Pergunta ${i+1}</div>
+            <input type="text" placeholder="texto da pergunta">
+            <input type="text" placeholder="cor de fundo da pergunta"> 
+            <div class="resposta-correta text">Resposta correta</div>
+            <input type="text" placeholder="Resposta correta">
+            <input type="text" placeholder="URL da imagem">
+            <div class="respostas-incorretas text">Respostas incorretas</div>
+            <input type="text" placeholder="Resposta incorreta 1">
+            <input type="text" class="margin-bottom" placeholder="URL da imagem 1">
+
+            <input type="text" placeholder="Resposta incorreta 2">
+            <input type="text" class="margin-bottom" placeholder="URL da imagem 2">
+
+            <input type="text" placeholder="Resposta incorreta 3">
+            <input type="text" placeholder="URL da imagem 3">
+        </div>
+    </li>`
+    }
+
    console.log(tituloQuizz.value) ;
    console.log(URLQuizz.value) ;
    console.log(quantidadePerguntas.value);
    console.log(nivelQuizz.value);
+}
+
+function editarQuestaox(questaoSelecionada){
+    let questaoNone= questaoSelecionada.children[0];
+    let questaoRemoveNone= questaoSelecionada.children[1];
+
+    questaoNone.classList.add('none');
+    questaoRemoveNone.classList.remove('none');
 }
 
 function niveisDoQuizz(){
