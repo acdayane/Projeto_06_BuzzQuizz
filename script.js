@@ -26,6 +26,7 @@ function renderizarQuizzes (res) {
         </li>
         `
     }    
+
 }
 
 function deuErro(err) {
@@ -55,21 +56,33 @@ removeTela();
         removeTela1.classList.add ('none');    
     }
 
-    const umQuizz = document.querySelector('.um-quizz');
+    const umQuizz = document.querySelector('.container-quizz');
     umQuizz.classList.remove ('none');
+
+    const banner = document.querySelector('.banner-quizz')
        
-    umQuizz.innerHTML = `
-        <div class = 'quizz'>
+    banner.innerHTML = `
             <span>${quizzClicado.title}</span>
-            <img src = '${quizzClicado.image}' />
-        </div>
+            <img src = '${quizzClicado.image}' />        
         ` 
-    console.log(quizzClicado.title)
+    
+}
+      
 
-    console.log (umQuizz);
-}       
 
+/* 
+renderizarQuiz(); 
 
+function renderizarQuiz(){
+    let arrayRespostas = [];
+
+    arrayRespostas.sort(comparador);
+
+    function comparador() { 
+	    return Math.random() - 0.5; 
+    } 
+
+} */
 
 function criaQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
