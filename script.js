@@ -3,6 +3,8 @@ let idQuizz;
 let quizzClicado;
 let i;
 let j;
+let acertos = 0;
+let arrayFim = [];
 
 
 // Obter quizzes que não são do usuário para tela 1
@@ -170,6 +172,8 @@ function renderizarQuiz(){
 
     for (let i=0; i<quizzClicado.questions.length; i++){ 
         
+        arrayFim.push(0);
+
         const feed = document.querySelector ('.feed-quizz');
 
             feed.innerHTML += 
@@ -222,17 +226,21 @@ function renderizarQuiz(){
 
 
 function addCorETransparencia (elementoClicado, pergunta) {
-    console.log(pergunta)
+    
+    arrayFim[pergunta] = 1;
+
     elementoClicado.classList.remove ('nao-clicado');
 
     if (elementoClicado.classList.contains ('true')){
-        elementoClicado.classList.add ('verde');
+        if (!elementoClicado.classList.contains ('verde')){
+            elementoClicado.classList.add ('verde');
+            acertos += 1;
+        }      
     }
     if (elementoClicado.classList.contains ('false')){
         elementoClicado.classList.add ('vermelho');
     }
 
-    console.log(elementoClicado)
     elementos = document.querySelectorAll ('div.pergunta'+pergunta);
 
     for (i=0; i<elementos.length; i++){
@@ -247,6 +255,9 @@ function addCorETransparencia (elementoClicado, pergunta) {
             elementos[i].classList.add ('vermelho');
         }        
     }
+    
+    setInterval(scroll, 2000);
+
 }  
 
 
