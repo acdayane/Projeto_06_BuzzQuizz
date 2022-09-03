@@ -92,28 +92,8 @@
     <div class="niveis-do-quizz none">
         <div class="criando-níveis">
             <div class="titulo-comeco">Agora, decida os níveis!</div>
-            <ul class="container-perguntas">
-                <li>
-                    <div class="perguntaX">
-                        <div class="numero-da-pergunta text">Nivel 1</div>
-                        <input type="text" placeholder="Título do nível">
-                        <input type="text" placeholder="% de acerto mínima"> 
-                        <input type="text" placeholder="URL da imagem do nível">
-                        <input type="text" class="descricao-nivel" placeholder="Descrição do nível">
-                    </div>
-                </li>
-
-                <li>
-                    <div class="pergunta-fechada">
-                        <div class="numero-da-pergunta text-closed">Nível 2 <ion-icon name="create-outline"></ion-icon></div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="pergunta-fechada">
-                        <div class="numero-da-pergunta text-closed">Nível 3 <ion-icon name="create-outline"></ion-icon></div>
-                    </div>
-                </li>
+            <ul class="container-perguntas ulNiveisQuizz">
+               
             </ul>
 
             <button class="prosseguir" onclick="sucessoQuizz()">Finalizar Quizz</button>
@@ -121,18 +101,10 @@
     </div>
 
     <!-- TELA 3.4: SUCESSO DO QUIZZ-->
-    <div class="sucesso-quizz none">
-        <div class="container-sucesso-quizz"> 
-            <div class="titulo-comeco"><b>Seu quizz está pronto!</b></div>
-            <div class = 'quizz' onclick = 'buscarQuizz(${quizzes[i].id})'>
-                    <span>Texto do seu quizz aqui</span>
-                    <img src ='https://s.aficionados.com.br/imagens/gnomo.jpg'/>
-            </div> 
-        </div>
-        <button class="acessar-quizz">Acessar Quizz</button>
-        <button class="back-home" onclick="backHome()">Voltar pra home</button>
-    </div>
-
+    <ul class="ul-sucesso-quizz">
+        
+    </ul>
+   
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
