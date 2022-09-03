@@ -1,5 +1,6 @@
 let quizzes;
 let idQuizz;
+let quizzClicado;
 
 
 // Obter quizzes que não são do usuário para tela 1
@@ -220,16 +221,49 @@ removeTela();
             <span>${quizzClicado.title}</span>
             <img src = '${quizzClicado.image}' />        
         ` 
+    renderizarQuiz(); 
     
-}
-      
-
-
-/* 
-renderizarQuiz(); 
-
 function renderizarQuiz(){
+
+    for (let i=0; i<quizzClicado.questions.length; i++){ 
+        
+        const feed = document.querySelector ('.feed-quizz');
+
+            feed.innerHTML += 
+        
+           `<div class = 'box-quizz'>                    
+                <div class = 'titulo-quizz' style='background-color: ${quizzClicado.questions[i].color}'>
+                    <h1>${quizzClicado.questions[i].title}</h1> 
+                </div>
+                <div class = 'respostas-quizz box-quizz${i}'>
+
+                </div>
+            </div>
+            `
+                                
+        for (let j=0; j<quizzClicado.questions[i].answers.length; j++){
+
+            const box = document.querySelector ('.box-quizz'+i);
+
+            box.innerHTML +=
+            `   <div class = 'resposta-quizz'  onclick = 'addTransparencia(${quizzClicado.questions[i].answers[j]})'>
+                    <img src = '${quizzClicado.questions[i].answers[j].image}'/>
+                    <p>${quizzClicado.questions[i].answers[j].text}</p>
+                </div>                        
+                
+            `           
+        }
+            
+    }
+
+
+    
+/*
     let arrayRespostas = [];
+
+    for (let i=0; i<quizzClicado.questions.length; i++){
+        arrayRespostas.push(i);
+    }
 
     arrayRespostas.sort(comparador);
 
@@ -237,7 +271,13 @@ function renderizarQuiz(){
 	    return Math.random() - 0.5; 
     } 
 
-} */
+    console.log (arrayRespostas)
+
+*/
+
+
+}
+}
 
 function criaQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
