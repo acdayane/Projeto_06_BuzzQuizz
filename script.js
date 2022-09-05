@@ -9,38 +9,9 @@ let acertos = 0;
 let arrayFim = [];
 let arrayRespostas = [];
 let addFinal;
-
-
-// Obter quizzes que não são do usuário para tela 1
-obterQuizzes();
-
-function obterQuizzes () {
-    const promessa = axios.get ('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
-    promessa.then(renderizarQuizzes);
-    promessa.catch(deuErro);
-}
-
-function renderizarQuizzes (res) {
-    quizzes = res.data;
-    console.log(res.data);
-
-    const listaQuizzes = document.querySelector('.lista-quizzes');
-
-    for (let i=0; i<quizzes.length; i++){
-        listaQuizzes.innerHTML += `
-        <li class = 'quizz' onclick = 'buscarQuizz(${quizzes[i].id})'>
-            <span>${quizzes[i].title}</span>
-            <img src = '${quizzes[i].image}' />
-        </li>
-        `
-    }    
-
-}
-
-function deuErro(err) {
-    console.log('Deu erro no recebimento dos quizzes', err);
-    alert("Algo deu errado. Por favor, recarregue a página.");  
-} 
+let quizzesLocalStorage= JSON.parse(localStorage.getItem("objetoQuizz")||"[]");
+let DivCriarQuizz= document.querySelector(".criar-quizz");
+let DivContendoSeusQuizzes= document.querySelector('.seus-quizzes');
 
 //VARIÁVEIS USADAS MAIS DE UMA VEZ:
 let homePage= document.querySelector(".conteudo-principal");
@@ -49,8 +20,12 @@ let perguntasCriadas= document.querySelector(".tela-criando-perguntas-quizz");
 let containerPerguntas= document.querySelector(".container-perguntas");
 let niveisQuizz= document.querySelector(".niveis-do-quizz");
 let ulNiveisQuizz= document.querySelector(".ulNiveisQuizz");
-//let sucessoDoQuizz= document.querySelector(".sucesso-quizz");
 let ulSucessoQuizz= document.querySelector(".ul-sucesso-quizz");
+let ulContendoQuizzCriados= document.querySelector(".lista-seus-quizzes");
+
+//PARTES DOS OBJETOS
+let objetoPromessa ="";
+let objetoPromessaSerializado ="";
 
 //VALORES DOS INPUTS:
 let tituloQuizz= document.querySelector(".Título-Quizz");
@@ -78,6 +53,50 @@ let descricaoNivel="";
 //ARRAYS CONTENDO PARTE DO OBBJETO
 let objetoQuestoes= [];
 let objetoNiveis= [];
+
+if(quizzesLocalStorage!=""){
+    DivContendoSeusQuizzes.classList.remove("none");
+    DivCriarQuizz.classList.add("none");
+
+        ulContendoQuizzCriados.innerHTML+=` 
+        <li class = 'quizz' onclick = 'abrirQuizzCriado(this)'>
+            <span>${quizzesLocalStorage.title}</span>
+            <img src = '${quizzesLocalStorage.image}' />
+        </li>`;
+   
+}
+// Obter quizzes que não são do usuário para tela 1
+obterQuizzes();
+
+function obterQuizzes () {
+    const promessa = axios.get ('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+    promessa.then(renderizarQuizzes);
+    promessa.catch(deuErro);
+}
+
+function renderizarQuizzes (res) {
+    quizzes = res.data;
+    //console.log(res.data);
+
+    const listaQuizzes = document.querySelector('.lista-quizzes');
+
+    for (let i=0; i<quizzes.length; i++){
+        listaQuizzes.innerHTML += `
+        <li class = 'quizz' onclick = 'buscarQuizz(${quizzes[i].id})'>
+            <span>${quizzes[i].title}</span>
+            <img src = '${quizzes[i].image}' />
+        </li>
+        `
+    }    
+
+}
+
+function deuErro(err) {
+    //console.log('Deu erro no recebimento dos quizzes', err);
+    alert("Algo deu errado. Por favor, recarregue a página.");  
+} 
+
+
 
 function criarQuizz(){
     homePage.classList.add("none")
@@ -169,8 +188,8 @@ function validarQuestoes(){
     if(ca==quantidadePerguntas.value){
        niveisDoQuizz();
     }
-    console.log(ca);
-    console.log(quantidadePerguntas.value);
+    //console.log(ca);
+    //console.log(quantidadePerguntas.value);
 }
 
 function editarQuestaox(questaoSelecionada){
@@ -225,10 +244,10 @@ function niveisDoQuizz(){
         },
         );
     }
-    console.log(objetoQuestoes);
-    console.log(objetoQuestoes[0].title);
-    console.log(objetoQuestoes[1].title);
-    console.log(objetoQuestoes[2].title);
+    //console.log(objetoQuestoes);
+    //console.log(objetoQuestoes[0].title);
+    //console.log(objetoQuestoes[1].title);
+    //console.log(objetoQuestoes[2].title);
 
     for(let i=0; i<nivelQuizz.value; i++){
         ulNiveisQuizz.innerHTML+= ` 
@@ -281,8 +300,8 @@ function validarNiveis(){
     if(co==nivelQuizz.value){
         sucessoQuizz();
     }
-    console.log(co);
-    console.log(nivelQuizz.value);
+    //console.log(co);
+    //console.log(nivelQuizz.value);
 }
 
 function sucessoQuizz(){
@@ -301,7 +320,7 @@ function sucessoQuizz(){
          },);
     }
 
-    console.log(objetoNiveis);
+    //console.log(objetoNiveis);
 
     niveisQuizz.classList.add("none");
     ulSucessoQuizz.classList.remove("none");
@@ -320,22 +339,33 @@ function sucessoQuizz(){
         </div>
     </li>`;
 
-    let promessa=axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', {
+    objetoPromessa= {
         title: tituloQuizz.value,
         image: URLQuizz.value,
         questions: objetoQuestoes,
         levels: objetoNiveis,
-        })
+        };
+        console.log(objetoPromessa);
 
-        
+    let promessa=axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objetoPromessa);
+    console.log(objetoPromessa);
 
-   promessa.then(obterQuizzes);
+   promessa.then(sucessoCriacaoQuizz);
    promessa.catch(mostrarErro);
 }
 
-//function Postou(){
-  //  console.log("postou seu quizz com sucesso");
-//}
+function sucessoCriacaoQuizz(respostaPost){
+    console.log(respostaPost.data);
+    obterQuizzes();
+    postNoLocalStorage(respostaPost.data);
+}
+
+function postNoLocalStorage(respostaQuizz){
+    objetoPromessaSerializado= JSON.stringify(respostaQuizz);
+    localStorage.setItem("objetoQuizz", objetoPromessaSerializado);
+}
+
+
 
 function mostrarErro(erroPost){
     if(erroPost.response.status=== 422){
@@ -355,6 +385,109 @@ function mostrarErro(erroPost){
 function backHome(){
     homePage.classList.remove("none");
     ulSucessoQuizz.classList.add("none");
+    DivContendoSeusQuizzes.classList.remove("none");
+    DivCriarQuizz.classList.add("none");
+
+    console.log(quizzesLocalStorage);
+
+    ulContendoQuizzCriados.innerHTML+=` 
+    <li class = 'quizz' onclick = 'abrirQuizzCriado(this)'>
+        <span>${quizzesLocalStorage.title}</span>
+        <img src = '${quizzesLocalStorage.image}' />
+    </li>`;
+
+}
+
+function abrirQuizzCriado(quizzSelecionado){
+    
+        promessa = axios.get (`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzSelecionado.id}`);
+        promessa.then(abrirQuizz);
+        promessa.catch(deuErro);
+    
+    
+    function abrirQuizz(res) {
+    
+        quizzClicado = res.data; 
+        
+    
+    removeTela();
+    
+        function removeTela(){
+            let removeTela1 = document.querySelector ('.conteudo-principal')
+            removeTela1.classList.add ('none');    
+        }
+    
+        const umQuizz = document.querySelector('.container-quizz');
+        umQuizz.classList.remove ('none');
+    
+        const banner = document.querySelector('.banner-quizz')
+           
+        banner.innerHTML = `
+                <span>${quizzClicado.title}</span>
+                <img src = '${quizzClicado.image}' />        
+            ` 
+    
+        renderizarQuizz();
+    
+    }
+       
+      
+    function renderizarQuizz(){
+    
+        for (let i=0; i<quizzClicado.questions.length; i++){ 
+            
+            arrayFim.push(0);
+    
+            feed = document.querySelector ('.feed-quizz');
+    
+                feed.innerHTML += 
+            
+               `<div class = 'box-quizz'>                    
+                    <div class = 'titulo-quizz' style='background-color: ${quizzClicado.questions[i].color}'>
+                        <h1>${quizzClicado.questions[i].title}</h1> 
+                    </div>
+                    <div class = 'respostas-quizz box-quizz${i}'>
+    
+                    </div>
+                </div>
+                `
+                                                
+            for (let j=0; j<quizzClicado.questions[i].answers.length; j++){
+                
+                embaralharQuizz();
+    
+                function embaralharQuizz(){             
+                
+                            arrayRespostas.push(j);
+                
+                            arrayRespostas.sort(comparador);
+                
+                            function comparador() { 
+                                return Math.random() - 0.5; 
+                            }  
+    
+                }
+            }
+    
+            for (let k=0; k<arrayRespostas.length; k++){
+    
+                box = document.querySelector ('.box-quizz'+i);
+    
+                box.innerHTML +=
+                `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzClicado.questions[i].answers[arrayRespostas[k]].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
+                        <img src = '${quizzClicado.questions[i].answers[arrayRespostas[k]].image}'/>
+                        <p>${quizzClicado.questions[i].answers[arrayRespostas[k]].text}</p>
+                    </div>                        
+                   
+                `        
+            }   
+            
+            
+            arrayRespostas = [];
+        }
+    }
+    
+    
 }
 
 
@@ -362,7 +495,7 @@ function backHome(){
 function buscarQuizz(idQuizz) {
     
     promessa = axios.get (`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`);
-    promessa.then(abrirQuizz, console.log(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idQuizz}`));
+    promessa.then(abrirQuizz);
     promessa.catch(deuErro);
 
 }
@@ -371,7 +504,7 @@ function buscarQuizz(idQuizz) {
 function abrirQuizz(res) {
 
     quizzClicado = res.data; 
-    console.log(quizzClicado)
+    
 
 removeTela();
 
@@ -445,7 +578,7 @@ function renderizarQuizz(){
             `        
         }   
         
-        console.log (arrayRespostas);
+        
         arrayRespostas = [];
     }
 }
@@ -482,8 +615,7 @@ function addCorETransparencia (elementoClicado, pergunta) {
         }        
     }
 
-    console.log (arrayFim);
-    console.log (acertos);
+   
 
     let soma = 0;
 
@@ -503,10 +635,10 @@ function finalizarQuizz (){
         addFinal = document.querySelector ('.box-final');
         addFinal.classList.remove ('none');
 
-        console.log (arrayFim.length)
+        
 
         let percentualAcertos = (Math.round((acertos/arrayFim.length) * 100 ));
-        console.log (percentualAcertos)
+        
 
         for (let i=0; i<quizzClicado.levels.length; i++){ 
 
