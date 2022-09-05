@@ -9,6 +9,7 @@ let acertos = 0;
 let arrayFim = [];
 let arrayRespostas = [];
 let addFinal;
+let arrayNiveis = [];
 
 
 // Obter quizzes que não são do usuário para tela 1
@@ -376,6 +377,8 @@ removeTela();
         removeTela1.classList.add ('none');    
     }
 
+    window.scroll(0,0);
+
     const umQuizz = document.querySelector('.container-quizz');
     umQuizz.classList.remove ('none');
 
@@ -441,7 +444,7 @@ function renderizarQuizz(){
             `        
         }   
         
-        console.log (arrayRespostas);
+        console.log (arrayRespostas, 'quantidade de respostas');
         arrayRespostas = [];
     }
 }
@@ -504,27 +507,41 @@ function finalizarQuizz (){
         let percentualAcertos = (Math.round((acertos/arrayFim.length) * 100 ));
         console.log (percentualAcertos)
 
+        let armazenaNivel;
+        
         for (let i=0; i<quizzClicado.levels.length; i++){ 
 
-            const qtdeNiveis = quizzClicado.levels.length;
-            //ordenar
-            //comparar
-                
-        //let titulo = percentualAcertos + '% : ' + quizzClicado.levels[i].title;
-        //console.log(titulo);   
-          
-        addFinal.innerHTML = `
-            <div class = 'titulo-final'>
-                <h1>BATATA</h1> 
-            </div>
-            <div class = 'conteudo-final'>
-                <img src = '${quizzClicado.levels[i].image}'/>
-                <p>${quizzClicado.levels[i].text}</p> 
-            </div>          
-        `
-    
+            let m = 0;
+
+            arrayNiveis.push(quizzClicado.levels[i]); //identifica qtde de niveis
+
+            arrayNiveis.sort(function(a, b) { //ordena niveis em ordem crescente
+                return a - b;
+            });
+            console.log(arrayNiveis, 'niveis');
+
+            for (m=0; m<arrayNiveis.length; m++){
+
+                if (percentualAcertos >= arrayNiveis[m].minValue){
+                    armazenaNivel = arrayNiveis[m];
+
+                let tituloResultado = percentualAcertos + '% de acerto: ' + arrayNiveis[m].title;
+                console.log(tituloResultado)
+
+                addFinal.innerHTML = `
+                <div class = 'titulo-final'>
+                    <h1>${tituloResultado}</h1> 
+                </div>
+                <div class = 'conteudo-final'>
+                    <img src = '${arrayNiveis[m].image}'/>   
+                    <p>${arrayNiveis[m].text}</p>                     
+                </div>          
+                `
+                }       
+            }
+        }   
 }
-}
+
 
 function reiniciarQuizz (){
     const feed = document.querySelector ('.feed-quizz');
@@ -532,8 +549,9 @@ function reiniciarQuizz (){
     addFinal.classList.add ('none');
     arrayFim = [];
     acertos = 0;
+    arrayNiveis = [];
     renderizarQuizz(quizzClicado);
-    
+    window.scroll(0,0);   
 
 } 
 
@@ -548,7 +566,8 @@ function voltarHome (){
     quizzClicado = 0;
     addFinal.classList.add ('none');
     feed.innerHTML = '';
-    box.innerHTML = '';   
+    box.innerHTML = ''; 
+    arrayNiveis = [];  
 
 }
 
