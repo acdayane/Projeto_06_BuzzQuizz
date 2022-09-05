@@ -1,10 +1,14 @@
 let quizzes;
 let idQuizz;
 let quizzClicado;
+let feed;
+let box;
 let i;
 let j;
 let acertos = 0;
 let arrayFim = [];
+let arrayRespostas = [];
+let addFinal;
 
 
 // Obter quizzes que não são do usuário para tela 1
@@ -17,7 +21,6 @@ function obterQuizzes () {
 }
 
 function renderizarQuizzes (res) {
-    console.log('Deu certo o recebimento dos quizzes');
     quizzes = res.data;
     console.log(res.data);
 
@@ -227,16 +230,19 @@ removeTela();
             <span>${quizzClicado.title}</span>
             <img src = '${quizzClicado.image}' />        
         ` 
-    renderizarQuiz(); 
 
-    
-function renderizarQuiz(){
+    renderizarQuizz();
+
+}
+   
+  
+function renderizarQuizz(){
 
     for (let i=0; i<quizzClicado.questions.length; i++){ 
         
         arrayFim.push(0);
 
-        const feed = document.querySelector ('.feed-quizz');
+        feed = document.querySelector ('.feed-quizz');
 
             feed.innerHTML += 
         
@@ -249,44 +255,43 @@ function renderizarQuiz(){
                 </div>
             </div>
             `
-                                
+                                            
         for (let j=0; j<quizzClicado.questions[i].answers.length; j++){
+            
+            embaralharQuizz();
 
-            const box = document.querySelector ('.box-quizz'+i);
+            function embaralharQuizz(){             
+            
+                        arrayRespostas.push(j);
+            
+                        arrayRespostas.sort(comparador);
+            
+                        function comparador() { 
+                            return Math.random() - 0.5; 
+                        }  
+
+            }
+        }
+
+        for (let k=0; k<arrayRespostas.length; k++){
+
+            box = document.querySelector ('.box-quizz'+i);
 
             box.innerHTML +=
-            `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzClicado.questions[i].answers[j].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
-                    <img src = '${quizzClicado.questions[i].answers[j].image}'/>
-                    <p>${quizzClicado.questions[i].answers[j].text}</p>
+            `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzClicado.questions[i].answers[arrayRespostas[k]].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
+                    <img src = '${quizzClicado.questions[i].answers[arrayRespostas[k]].image}'/>
+                    <p>${quizzClicado.questions[i].answers[arrayRespostas[k]].text}</p>
                 </div>                        
-                
-            `           
-        }            
+               
+            `        
+        }   
+        
+        console.log (arrayRespostas);
+        arrayRespostas = [];
     }
 }
 
-
-  
-/*
-    let arrayRespostas = [];
-
-    for (let i=0; i<quizzClicado.questions.length; i++){
-        arrayRespostas.push(i);
-    }
-
-    arrayRespostas.sort(comparador);
-
-    function comparador() { 
-	    return Math.random() - 0.5; 
-    } 
-
-    console.log (arrayRespostas)
-
-*/
-
-}
-
-
+// Comportamento das respostas na tela 2
 function addCorETransparencia (elementoClicado, pergunta) {
     
     arrayFim[pergunta] = 1;
@@ -317,11 +322,80 @@ function addCorETransparencia (elementoClicado, pergunta) {
             elementos[i].classList.add ('vermelho');
         }        
     }
-    
-    setInterval(scroll, 2000);
 
+    console.log (arrayFim);
+    console.log (acertos);
+
+    let soma = 0;
+
+    for (l=0; l<arrayFim.length; l++){
+
+        soma = soma + arrayFim[l];
+        
+        if (arrayFim.length === soma){
+            
+            finalizarQuizz();
+        }
+    }    
 }  
 
+// Renderizar box de finalização do quizz
+function finalizarQuizz (){
+        addFinal = document.querySelector ('.box-final');
+        addFinal.classList.remove ('none');
+
+        console.log (arrayFim.length)
+
+        let percentualAcertos = (Math.round((acertos/arrayFim.length) * 100 ));
+        console.log (percentualAcertos)
+
+        for (let i=0; i<quizzClicado.levels.length; i++){ 
+
+            const qtdeNiveis = quizzClicado.levels.length;
+            //ordenar
+            //comparar
+                
+        //let titulo = percentualAcertos + '% : ' + quizzClicado.levels[i].title;
+        //console.log(titulo);   
+          
+        addFinal.innerHTML = `
+            <div class = 'titulo-final'>
+                <h1>BATATA</h1> 
+            </div>
+            <div class = 'conteudo-final'>
+                <img src = '${quizzClicado.levels[i].image}'/>
+                <p>${quizzClicado.levels[i].text}</p> 
+            </div>          
+        `
+    
+}
+}
+
+function reiniciarQuizz (){
+    const feed = document.querySelector ('.feed-quizz');
+    feed.innerHTML = ''; 
+    addFinal.classList.add ('none');
+    arrayFim = [];
+    acertos = 0;
+    renderizarQuizz(quizzClicado);
+    
+
+} 
+
+function voltarHome (){    
+
+    const apaga = document.querySelector ('.container-quizz');
+    apaga.classList.add ('none');
+
+    const aparece = document.querySelector ('.conteudo-principal');
+    aparece.classList.remove ('none');
+
+    quizzClicado = 0;
+    addFinal.classList.add ('none');
+    feed.innerHTML = '';
+    box.innerHTML = '';   
+
+}
 
 function criaQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
