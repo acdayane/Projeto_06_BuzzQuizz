@@ -10,7 +10,6 @@
 
     <title>BuzzQuizz</title>
 </head>
-
 <body>
 
     <header>
@@ -44,6 +43,7 @@
             </div>
 
         </div>
+
 
     </div>
 
@@ -88,7 +88,7 @@
                
             </ul>
 
-            <button class="prosseguir" onclick="niveisDoQuizz()">Prosseguir para criar níveis</button>
+            <button class="prosseguir" onclick="validarQuestoes()">Prosseguir para criar níveis</button>
         </div>
     </div>
 
@@ -101,12 +101,12 @@
                
             </ul>
 
-            <button class="prosseguir" onclick="sucessoQuizz()">Finalizar Quizz</button>
+            <button class="prosseguir" onclick="validarNiveis()">Finalizar Quizz</button>
         </div>
     </div>
 
     <!-- TELA 3.4: SUCESSO DO QUIZZ-->
-    <ul class="ul-sucesso-quizz">
+    <ul class="ul-sucesso-quizz none">
         
     </ul>
    
@@ -114,6 +114,6 @@
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
-    
+
 </body>
 </html>
