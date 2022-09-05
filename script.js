@@ -1,6 +1,10 @@
 let quizzes;
 let idQuizz;
 let quizzClicado;
+let i;
+let j;
+let acertos = 0;
+let arrayFim = [];
 
 
 // Obter quizzes que não são do usuário para tela 1
@@ -346,6 +350,7 @@ function backHome(){
     ulSucessoQuizz.classList.add("none");
 }
 
+
 // Abrir quizz selecionado na tela 2
 function buscarQuizz(idQuizz) {
     
@@ -355,9 +360,10 @@ function buscarQuizz(idQuizz) {
 
 }
 
+
 function abrirQuizz(res) {
 
-    let quizzClicado = res.data; 
+    quizzClicado = res.data; 
     console.log(quizzClicado)
 
 removeTela();
@@ -377,11 +383,14 @@ removeTela();
             <img src = '${quizzClicado.image}' />        
         ` 
     renderizarQuiz(); 
+
     
 function renderizarQuiz(){
 
     for (let i=0; i<quizzClicado.questions.length; i++){ 
         
+        arrayFim.push(0);
+
         const feed = document.querySelector ('.feed-quizz');
 
             feed.innerHTML += 
@@ -401,18 +410,18 @@ function renderizarQuiz(){
             const box = document.querySelector ('.box-quizz'+i);
 
             box.innerHTML +=
-            `   <div class = 'resposta-quizz'  onclick = 'addTransparencia(${quizzClicado.questions[i].answers[j]})'>
+            `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzClicado.questions[i].answers[j].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
                     <img src = '${quizzClicado.questions[i].answers[j].image}'/>
                     <p>${quizzClicado.questions[i].answers[j].text}</p>
                 </div>                        
                 
             `           
-        }
-            
+        }            
     }
+}
 
 
-    
+  
 /*
     let arrayRespostas = [];
 
@@ -430,9 +439,44 @@ function renderizarQuiz(){
 
 */
 
+}
 
-}
-}
+
+function addCorETransparencia (elementoClicado, pergunta) {
+    
+    arrayFim[pergunta] = 1;
+
+    elementoClicado.classList.remove ('nao-clicado');
+
+    if (elementoClicado.classList.contains ('true')){
+        if (!elementoClicado.classList.contains ('verde')){
+            elementoClicado.classList.add ('verde');
+            acertos += 1;
+        }      
+    }
+    if (elementoClicado.classList.contains ('false')){
+        elementoClicado.classList.add ('vermelho');
+    }
+
+    elementos = document.querySelectorAll ('div.pergunta'+pergunta);
+
+    for (i=0; i<elementos.length; i++){
+
+        if (elementos[i].classList.contains ('nao-clicado')){
+            elementos[i].classList.add ('transparencia');
+        }
+        if (elementos[i].classList.contains ('true')){
+            elementos[i].classList.add ('verde');
+        }
+        if (elementos[i].classList.contains ('false')){
+            elementos[i].classList.add ('vermelho');
+        }        
+    }
+    
+    setInterval(scroll, 2000);
+
+}  
+
 
 function criaQuizz(){
     let criandoQuizz= document.querySelector(".criando-quizz");
