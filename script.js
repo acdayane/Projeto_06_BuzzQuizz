@@ -76,7 +76,7 @@ let porcentagemDeAcerto= "";
 let URLimagemDoNivel= "";
 let descricaoNivel="";
 
-//ARRAYS CONTENDO PAETE DO OBBJETO
+//ARRAYS CONTENDO PARTE DO OBBJETO
 let objetoQuestoes= [];
 let objetoNiveis= [];
 
@@ -163,7 +163,9 @@ function validarQuestoes(){
                 textoDaResposta3.value.length>0 &&
                 URLdaResposta3.value.includes('https')){
                    ca=ca+1
-                } 
+                } else{
+                    alert("Você escreveu algo errado. Verifique os links e a quantidade d ecaracteres.");
+                }
     } 
     if(ca==quantidadePerguntas.value){
        niveisDoQuizz();
@@ -273,7 +275,9 @@ function validarNiveis(){
             URLimagemDoNivel.value.includes('https') &&
             descricaoNivel.value.length>=30){
                 co=co+1
-        } 
+        } else{
+            alert("você escreveu algo errado. Favor veriricar links e quantidade de caracteres.");
+        }
     } 
     if(co==nivelQuizz.value){
         sucessoQuizz();
@@ -326,13 +330,13 @@ function sucessoQuizz(){
 
         
 
-   promessa.then(Postou);
+   promessa.then(obterQuizzes);
    promessa.catch(mostrarErro);
 }
 
-function Postou(){
-    console.log("postou seu quizz com sucesso");
-}
+//function Postou(){
+  //  console.log("postou seu quizz com sucesso");
+//}
 
 function mostrarErro(erroPost){
     if(erroPost.response.status=== 422){
