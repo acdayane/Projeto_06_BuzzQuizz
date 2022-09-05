@@ -55,8 +55,22 @@ let textoDaPergunta= "";
 let corDaPergunta= "";
 let textoDaRespostaCorreta= "";
 let URLdaRespostaCorreta= "";
-let textoDaResposta="";
-let URLdaResposta="";
+let textoDaResposta1="";
+let URLdaResposta1="";
+let textoDaResposta2="";
+let URLdaResposta2="";
+let textoDaResposta3="";
+let URLdaResposta3="";
+
+//VALORES DOS INPUTS DA TELA 3.3:
+let tituloDoNivel= "";
+let porcentagemDeAcerto= "";
+let URLimagemDoNivel= "";
+let descricaoNivel="";
+
+//ARRAYS CONTENDO PAETE DO OBBJETO
+let objetoQuestoes= [];
+let objetoNiveis= [];
 
 function criarQuizz(){
     homePage.classList.add("none")
@@ -103,29 +117,51 @@ function criePerguntas(){
 
             <div class="respostas-incorretas text">Respostas incorretas</div>
             
-            <input type="text" class="Texto-da-resposta${i+1}" placeholder="Resposta incorreta 1">
-            <input type="text" class="margin-bottom URL-da-resposta${i+1}" placeholder="URL da imagem 1">
+            <input type="text" class="Texto-da-resposta-1-${i+1}" placeholder="Resposta incorreta 1">
+            <input type="text" class="margin-bottom URL-da-resposta-1-${i+1}" placeholder="URL da imagem 1">
 
-            <input type="text" class="Texto-da-resposta${i+1}" placeholder="Resposta incorreta 2">
-            <input type="text" class="margin-bottom URL-da-resposta${i+1}" placeholder="URL da imagem 2">
+            <input type="text" class="Texto-da-resposta-2-${i+1}" placeholder="Resposta incorreta 2">
+            <input type="text" class="margin-bottom URL-da-resposta-2-${i+1}" placeholder="URL da imagem 2">
 
-            <input type="text" class="Texto-da-resposta${i+1}" placeholder="Resposta incorreta 3">
-            <input type="text" class="URL-da-resposta${i+1}" placeholder="URL da imagem 3">
+            <input type="text" class="Texto-da-resposta-3-${i+1}" placeholder="Resposta incorreta 3">
+            <input type="text" class="URL-da-resposta-3-${i+1}" placeholder="URL da imagem 3">
         </div>
     </li>`
     }
-    //VALORES DOS INPUTS DA TELA 3.2:
-    textoDaPergunta= document.querySelector(".texto-da-pergunta1");
-    corDaPergunta= document.querySelector(".cor-da-pergunta1");
-    textoDaRespostaCorreta= document.querySelector(".Texto-da-resposta-correta1");
-    URLdaRespostaCorreta= document.querySelector(".URL-da-resposta-correta1");
-    textoDaResposta= document.querySelector(".Texto-da-resposta1");
-    URLdaResposta=document.querySelector(".URL-da-resposta1");
+}
 
-   console.log(tituloQuizz.value) ;
-   console.log(URLQuizz.value) ;
-   console.log(quantidadePerguntas.value);
-   console.log(nivelQuizz.value);
+function validarQuestoes(){
+    let ca=0
+    for(let i=0; i<quantidadePerguntas.value; i++){
+            textoDaPergunta= document.querySelector(`.texto-da-pergunta${i+1}`);
+            corDaPergunta= document.querySelector(`.cor-da-pergunta${i+1}`);
+            textoDaRespostaCorreta= document.querySelector(`.Texto-da-resposta-correta${i+1}`);
+            URLdaRespostaCorreta= document.querySelector(`.URL-da-resposta-correta${i+1}`);
+            textoDaResposta1=document.querySelector(`.Texto-da-resposta-1-${i+1}`);
+            URLdaResposta1=document.querySelector(`.URL-da-resposta-1-${i+1}`);
+            textoDaResposta2=document.querySelector(`.Texto-da-resposta-2-${i+1}`);
+            URLdaResposta2=document.querySelector(`.URL-da-resposta-2-${i+1}`);
+            textoDaResposta3=document.querySelector(`.Texto-da-resposta-3-${i+1}`);
+            URLdaResposta3=document.querySelector(`.URL-da-resposta-3-${i+1}`);
+
+            if(textoDaPergunta.value.length>=20 &&
+                corDaPergunta.value.length===7 &&
+                textoDaRespostaCorreta.value.length>0 &&
+                URLdaRespostaCorreta.value.includes('https') &&
+                textoDaResposta1.value.length>0 &&
+                URLdaResposta1.value.includes("https") &&
+                textoDaResposta2.value.length>0 &&
+                URLdaResposta2.value.includes('https') &&
+                textoDaResposta3.value.length>0 &&
+                URLdaResposta3.value.includes('https')){
+                   ca=ca+1
+                } 
+    } 
+    if(ca==quantidadePerguntas.value){
+       niveisDoQuizz();
+    }
+    console.log(ca);
+    console.log(quantidadePerguntas.value);
 }
 
 function editarQuestaox(questaoSelecionada){
@@ -137,6 +173,54 @@ function editarQuestaox(questaoSelecionada){
 }
 
 function niveisDoQuizz(){
+    
+    for (let i=0; i<quantidadePerguntas.value; i++){
+        
+            textoDaPergunta= document.querySelector(`.texto-da-pergunta${i+1}`);
+            corDaPergunta= document.querySelector(`.cor-da-pergunta${i+1}`);
+            textoDaRespostaCorreta= document.querySelector(`.Texto-da-resposta-correta${i+1}`);
+            URLdaRespostaCorreta= document.querySelector(`.URL-da-resposta-correta${i+1}`);
+            textoDaResposta1=document.querySelector(`.Texto-da-resposta-1-${i+1}`);
+            URLdaResposta1=document.querySelector(`.URL-da-resposta-1-${i+1}`);
+            textoDaResposta2=document.querySelector(`.Texto-da-resposta-2-${i+1}`);
+            URLdaResposta2=document.querySelector(`.URL-da-resposta-2-${i+1}`);
+            textoDaResposta3=document.querySelector(`.Texto-da-resposta-3-${i+1}`);
+            URLdaResposta3=document.querySelector(`.URL-da-resposta-3-${i+1}`);
+
+        objetoQuestoes.push( 
+            {
+            title: textoDaPergunta.value,
+            color: corDaPergunta.value,
+            answers: [
+                {
+                    text: textoDaRespostaCorreta.value,
+                    image: URLdaRespostaCorreta.value,
+                    isCorrectAnswer: true
+                },
+                {
+                    text: textoDaResposta1.value,
+                    image:  URLdaResposta1.value,
+                    isCorrectAnswer: false
+                },
+                {
+                    text: textoDaResposta2.value,
+                    image: URLdaResposta2.value,
+                    isCorrectAnswer: false
+                },
+                {
+                    text: textoDaResposta3.value,
+                    image: URLdaResposta3.value,
+                    isCorrectAnswer: false
+                }
+            ]
+        },
+        );
+    }
+    console.log(objetoQuestoes);
+    console.log(objetoQuestoes[0].title);
+    console.log(objetoQuestoes[1].title);
+    console.log(objetoQuestoes[2].title);
+
     for(let i=0; i<nivelQuizz.value; i++){
         ulNiveisQuizz.innerHTML+= ` 
         <li onclick="editarNivel(this)">
@@ -146,10 +230,10 @@ function niveisDoQuizz(){
 
             <div class="perguntaX none">
                 <div class="numero-da-pergunta text">Nivel ${i+1}</div>
-                <input type="text" placeholder="Título do nível">
-                <input type="text" placeholder="% de acerto mínima"> 
-                <input type="text" placeholder="URL da imagem do nível">
-                <input type="text" class="descricao-nivel" placeholder="Descrição do nível">
+                <input type="text" class="titulo-do-nivel-${i+1}" placeholder="Título do nível">
+                <input type="text" class="porcentagem-acerto-nivel-${i+1}" placeholder="% de acerto mínima"> 
+                <input type="text" class="URL-imagem-nivel-${i+1}" placeholder="URL da imagem do nível">
+                <input type="text" class="descricao-nivel-${i+1}" class="descricao-nivel" placeholder="Descrição do nível">
             </div>          
         </li>`
     }
@@ -167,7 +251,47 @@ function editarNivel(nivelSelecionado){
     nivelRemoveNone.classList.remove('none');
 }
 
+function validarNiveis(){
+    let co=0
+    for(let i=0; i<nivelQuizz.value; i++){
+        tituloDoNivel= document.querySelector(`.titulo-do-nivel-${i+1}`);
+        porcentagemDeAcerto= document.querySelector(`.porcentagem-acerto-nivel-${i+1}`);
+        URLimagemDoNivel= document.querySelector(`.URL-imagem-nivel-${i+1}`);
+        descricaoNivel= document.querySelector(`.descricao-nivel-${i+1}`);
+
+         if(tituloDoNivel.value.length>=10 &&
+            porcentagemDeAcerto.value >=0 &&
+            porcentagemDeAcerto.value<=100 &&
+            URLimagemDoNivel.value.includes('https') &&
+            descricaoNivel.value.length>=30){
+                co=co+1
+        } 
+    } 
+    if(co==nivelQuizz.value){
+        sucessoQuizz();
+    }
+    console.log(co);
+    console.log(nivelQuizz.value);
+}
+
 function sucessoQuizz(){
+
+    for(let i= 0; i<nivelQuizz.value; i++){
+        tituloDoNivel= document.querySelector(`.titulo-do-nivel-${i+1}`);
+        porcentagemDeAcerto= document.querySelector(`.porcentagem-acerto-nivel-${i+1}`);
+        URLimagemDoNivel= document.querySelector(`.URL-imagem-nivel-${i+1}`);
+        descricaoNivel= document.querySelector(`.descricao-nivel-${i+1}`);
+
+        objetoNiveis.push({
+            title: tituloDoNivel.value,
+            image: URLimagemDoNivel.value,
+            text: descricaoNivel.value,
+            minValue: porcentagemDeAcerto.value
+         },);
+    }
+
+    console.log(objetoNiveis);
+
     niveisQuizz.classList.add("none");
     ulSucessoQuizz.classList.remove("none");
     ulSucessoQuizz.innerHTML+=`
@@ -184,6 +308,37 @@ function sucessoQuizz(){
             <button class="back-home" onclick="backHome()">Voltar pra home</button>
         </div>
     </li>`;
+
+    let promessa=axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', {
+        title: tituloQuizz.value,
+        image: URLQuizz.value,
+        questions: objetoQuestoes,
+        levels: objetoNiveis,
+        })
+
+        
+
+   promessa.then(Postou);
+   promessa.catch(mostrarErro);
+}
+
+function Postou(){
+    console.log("postou seu quizz com sucesso");
+}
+
+function mostrarErro(erroPost){
+    if(erroPost.response.status=== 422){
+        alert("Sintaxe inválida. Por favor, verifique o que digitou.");
+    }
+    if(erroPost.response.status=== 409){
+        alert("Esse nome já está em uso. Por favor, escolha outro nome.");
+    }
+    if(erroPost.response.status=== 404){
+        alert("O servidor não pode encontrar o recurso solicitado. Esse link não está disponível ou não existe.");
+    }
+    if(erroPost.response.status=== 400){
+        alert("Sintaxe inválida. Por favor, verifique o que digitou.");
+    }
 }
 
 function backHome(){
