@@ -732,9 +732,9 @@ function voltarHome (){
     box.innerHTML = ''; 
     arrayFim = [];
     acertos = 0;
-    arrayNiveis = [];  
-    
+    arrayNiveis = [];   
     window.scroll(0,0);  
+
 }
 
 //function criaQuizz(){
