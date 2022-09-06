@@ -9,6 +9,7 @@ let acertos = 0;
 let arrayFim = [];
 let arrayRespostas = [];
 let addFinal;
+let arrayNiveis = [];
 let quizzesLocalStorage= JSON.parse(localStorage.getItem("objetoQuizz")||"[]");
 let DivCriarQuizz= document.querySelector(".criar-quizz");
 let DivContendoSeusQuizzes= document.querySelector('.seus-quizzes');
@@ -334,7 +335,7 @@ function sucessoQuizz(){
                         <img src ='${URLQuizz.value}'/>
                 </div> 
             </div>
-            <button class="acessar-quizz">Acessar Quizz</button>
+            <button class="acessar-quizz" onclick = 'abrirQuizzCriado(this)'>Acessar Quizz</button>
             <button class="back-home" onclick="backHome()">Voltar pra home</button>
         </div>
     </li>`;
@@ -399,22 +400,13 @@ function backHome(){
 }
 
 function abrirQuizzCriado(quizzSelecionado){
-    
-        promessa = axios.get (`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzSelecionado.id}`);
-        promessa.then(abrirQuizz);
-        promessa.catch(deuErro);
-    
-    
-    function abrirQuizz(res) {
-    
-        quizzClicado = res.data; 
-        
-    
+ 
     removeTela();
     
         function removeTela(){
             let removeTela1 = document.querySelector ('.conteudo-principal')
-            removeTela1.classList.add ('none');    
+            removeTela1.classList.add ('none'); 
+            ulSucessoQuizz.classList.add("none");
         }
     
         const umQuizz = document.querySelector('.container-quizz');
@@ -423,18 +415,18 @@ function abrirQuizzCriado(quizzSelecionado){
         const banner = document.querySelector('.banner-quizz')
            
         banner.innerHTML = `
-                <span>${quizzClicado.title}</span>
-                <img src = '${quizzClicado.image}' />        
+                <span>${quizzesLocalStorage.title}</span>
+                <img src = '${quizzesLocalStorage.image}' />        
             ` 
     
-        renderizarQuizz();
+        renderizarQuizzCriado();
     
     }
        
       
-    function renderizarQuizz(){
+function renderizarQuizzCriado(){
     
-        for (let i=0; i<quizzClicado.questions.length; i++){ 
+    for (let i=0; i<quizzesLocalStorage.questions.length; i++){ 
             
             arrayFim.push(0);
     
@@ -443,8 +435,8 @@ function abrirQuizzCriado(quizzSelecionado){
                 feed.innerHTML += 
             
                `<div class = 'box-quizz'>                    
-                    <div class = 'titulo-quizz' style='background-color: ${quizzClicado.questions[i].color}'>
-                        <h1>${quizzClicado.questions[i].title}</h1> 
+                    <div class = 'titulo-quizz' style='background-color: ${quizzesLocalStorage.questions[i].color}'>
+                        <h1>${quizzesLocalStorage.questions[i].title}</h1> 
                     </div>
                     <div class = 'respostas-quizz box-quizz${i}'>
     
@@ -452,11 +444,11 @@ function abrirQuizzCriado(quizzSelecionado){
                 </div>
                 `
                                                 
-            for (let j=0; j<quizzClicado.questions[i].answers.length; j++){
+            for (let j=0; j<quizzesLocalStorage.questions[i].answers.length; j++){
                 
-                embaralharQuizz();
+                embaralharQuizzCriado();
     
-                function embaralharQuizz(){             
+                function embaralharQuizzCriado(){             
                 
                             arrayRespostas.push(j);
                 
@@ -474,9 +466,9 @@ function abrirQuizzCriado(quizzSelecionado){
                 box = document.querySelector ('.box-quizz'+i);
     
                 box.innerHTML +=
-                `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzClicado.questions[i].answers[arrayRespostas[k]].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
-                        <img src = '${quizzClicado.questions[i].answers[arrayRespostas[k]].image}'/>
-                        <p>${quizzClicado.questions[i].answers[arrayRespostas[k]].text}</p>
+                `   <div class = 'resposta-quizz pergunta${i} nao-clicado ${quizzesLocalStorage.questions[i].answers[arrayRespostas[k]].isCorrectAnswer}'  onclick = 'addCorETransparencia(this, ${i})'>
+                        <img src = '${quizzesLocalStorage.questions[i].answers[arrayRespostas[k]].image}'/>
+                        <p>${quizzesLocalStorage.questions[i].answers[arrayRespostas[k]].text}</p>
                     </div>                        
                    
                 `        
@@ -484,10 +476,46 @@ function abrirQuizzCriado(quizzSelecionado){
             
             
             arrayRespostas = [];
-        }
     }
+ }
     
-    
+ function finalizarQuizzCriado(){
+    addFinal = document.querySelector ('.box-final');
+    addFinal.classList.remove ('none');
+
+    let percentualAcertos = (Math.round((acertos/arrayFim.length) * 100 ));
+    let armazenaNivel; 
+    for (let i=0; i<quizzesLocalStorage.levels.length; i++){ 
+
+        let m = 0;
+
+        arrayNiveis.push(quizzesLocalStorage.levels[i]); //identifica qtde de niveis
+
+        arrayNiveis.sort(function(a, b) { //ordena niveis em ordem crescente
+            return a - b;
+        });
+        console.log(arrayNiveis, 'niveis');
+
+        for (m=0; m<arrayNiveis.length; m++){
+
+            if (percentualAcertos >= arrayNiveis[m].minValue){
+                armazenaNivel = arrayNiveis[m];
+
+            let tituloResultado = percentualAcertos + '% de acerto: ' + arrayNiveis[m].title;
+            console.log(tituloResultado)
+
+            addFinal.innerHTML = `
+            <div class = 'titulo-final'>
+                <h1>${tituloResultado}</h1> 
+            </div>
+            <div class = 'conteudo-final'>
+                <img src = '${arrayNiveis[m].image}'/>   
+                <p>${arrayNiveis[m].text}</p>                     
+            </div>          
+            `
+            }       
+        }
+    }   
 }
 
 
@@ -512,6 +540,8 @@ removeTela();
         let removeTela1 = document.querySelector ('.conteudo-principal')
         removeTela1.classList.add ('none');    
     }
+
+    window.scroll(0,0);
 
     const umQuizz = document.querySelector('.container-quizz');
     umQuizz.classList.remove ('none');
@@ -640,27 +670,41 @@ function finalizarQuizz (){
         let percentualAcertos = (Math.round((acertos/arrayFim.length) * 100 ));
         
 
+        let armazenaNivel;
+        
         for (let i=0; i<quizzClicado.levels.length; i++){ 
 
-            const qtdeNiveis = quizzClicado.levels.length;
-            //ordenar
-            //comparar
-                
-        //let titulo = percentualAcertos + '% : ' + quizzClicado.levels[i].title;
-        //console.log(titulo);   
-          
-        addFinal.innerHTML = `
-            <div class = 'titulo-final'>
-                <h1>BATATA</h1> 
-            </div>
-            <div class = 'conteudo-final'>
-                <img src = '${quizzClicado.levels[i].image}'/>
-                <p>${quizzClicado.levels[i].text}</p> 
-            </div>          
-        `
-    
+            let m = 0;
+
+            arrayNiveis.push(quizzClicado.levels[i]); //identifica qtde de niveis
+
+            arrayNiveis.sort(function(a, b) { //ordena niveis em ordem crescente
+                return a - b;
+            });
+            console.log(arrayNiveis, 'niveis');
+
+            for (m=0; m<arrayNiveis.length; m++){
+
+                if (percentualAcertos >= arrayNiveis[m].minValue){
+                    armazenaNivel = arrayNiveis[m];
+
+                let tituloResultado = percentualAcertos + '% de acerto: ' + arrayNiveis[m].title;
+                console.log(tituloResultado)
+
+                addFinal.innerHTML = `
+                <div class = 'titulo-final'>
+                    <h1>${tituloResultado}</h1> 
+                </div>
+                <div class = 'conteudo-final'>
+                    <img src = '${arrayNiveis[m].image}'/>   
+                    <p>${arrayNiveis[m].text}</p>                     
+                </div>          
+                `
+                }       
+            }
+        }   
 }
-}
+
 
 function reiniciarQuizz (){
     const feed = document.querySelector ('.feed-quizz');
@@ -668,8 +712,9 @@ function reiniciarQuizz (){
     addFinal.classList.add ('none');
     arrayFim = [];
     acertos = 0;
+    arrayNiveis = [];
     renderizarQuizz(quizzClicado);
-    
+    window.scroll(0,0);   
 
 } 
 
@@ -677,18 +722,22 @@ function voltarHome (){
 
     const apaga = document.querySelector ('.container-quizz');
     apaga.classList.add ('none');
-
+    addFinal.classList.add ('none');
     const aparece = document.querySelector ('.conteudo-principal');
     aparece.classList.remove ('none');
 
     quizzClicado = 0;
-    addFinal.classList.add ('none');
+    
     feed.innerHTML = '';
-    box.innerHTML = '';   
-
+    box.innerHTML = ''; 
+    arrayFim = [];
+    acertos = 0;
+    arrayNiveis = [];  
+    
+    window.scroll(0,0);  
 }
 
-function criaQuizz(){
-    let criandoQuizz= document.querySelector(".criando-quizz");
-    criandoQuizz.classList.remove("none");
-}
+//function criaQuizz(){
+//    let criandoQuizz= document.querySelector(".criando-quizz");
+//    criandoQuizz.classList.remove("none");
+//}
